@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* E-commerce Design System - Professional color palette inspired by modern marketplaces */
+
+@layer base {
+  :root {
+    /* Core backgrounds */
+    --background: 0 0% 100%;
+    --surface: 0 0% 98%;
+    --card: 0 0% 100%;
+    --foreground: 220 13% 13%;
+
+    /* Brand colors - Modern blue palette */
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 221 83% 48%;
+    --primary-light: 221 83% 95%;
+
+    /* Accent colors for CTAs and highlights */
+    --accent: 24 95% 53%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 24 95% 48%;
+    --accent-light: 24 95% 95%;
+
+    /* Success colors for offers, savings */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 76% 95%;
+
+    /* Warning for limited offers */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 92% 95%;
+
+    /* Error states */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Neutral grays */
+    --muted: 220 13% 96%;
+    --muted-foreground: 220 9% 46%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 221 83% 53%;
+
+    /* Text hierarchy */
+    --text-primary: 220 13% 13%;
+    --text-secondary: 220 9% 46%;
+    --text-muted: 220 9% 61%;
+
+    /* Special e-commerce colors */
+    --price: 142 76% 36%;
+    --discount: 0 84% 60%;
+    --rating: 38 92% 50%;
+    --stock-low: 24 95% 53%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(221 83% 48%));
+    --gradient-accent: linear-gradient(135deg, hsl(24 95% 53%), hsl(24 95% 48%));
+    --gradient-hero: linear-gradient(135deg, hsl(221 83% 53%), hsl(24 95% 53%));
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220 13% 13% / 0.05);
+    --shadow-card: 0 4px 6px -1px hsl(220 13% 13% / 0.1);
+    --shadow-card-hover: 0 10px 15px -3px hsl(220 13% 13% / 0.1);
+    --shadow-modal: 0 25px 50px -12px hsl(220 13% 13% / 0.25);
+
+    /* Spacing */
+    --radius: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    --background: 220 13% 9%;
+    --surface: 220 13% 11%;
+    --card: 220 13% 11%;
+    --foreground: 0 0% 98%;
+
+    --primary: 221 83% 58%;
+    --primary-foreground: 220 13% 9%;
+    --primary-hover: 221 83% 63%;
+    --primary-light: 221 83% 15%;
+
+    --accent: 24 95% 58%;
+    --accent-foreground: 220 13% 9%;
+    --accent-hover: 24 95% 63%;
+    --accent-light: 24 95% 15%;
+
+    --success: 142 76% 41%;
+    --success-light: 142 76% 15%;
+
+    --muted: 220 13% 15%;
+    --muted-foreground: 220 9% 61%;
+    --border: 220 13% 20%;
+    --input: 220 13% 20%;
+
+    --text-primary: 0 0% 98%;
+    --text-secondary: 220 9% 71%;
+    --text-muted: 220 9% 61%;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
