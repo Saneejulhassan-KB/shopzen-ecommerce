@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Star, Heart, Share2, Truck, Shield, RotateCcw, 
-  Plus, Minus, ChevronLeft, ChevronRight, MapPin 
+  Plus, Minus, MapPin 
 } from "lucide-react";
 
 const ProductDetail = () => {
@@ -28,6 +28,8 @@ const ProductDetail = () => {
       "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&h=600&fit=crop",
       "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop",
       "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600&h=600&fit=crop",
       "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600&h=600&fit=crop"
     ],
     description: "Experience the ultimate in mobile technology with the Samsung Galaxy S23 Ultra. Featuring a stunning 6.8-inch Dynamic AMOLED display, advanced camera system with 200MP main sensor, and powerful performance that handles everything you throw at it.",
@@ -102,86 +104,76 @@ const ProductDetail = () => {
           <span className="text-text-primary ml-1">{product.name}</span>
         </nav>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          {/* Product Images */}
-          <div className="space-y-4">
-            <div className="aspect-square bg-surface rounded-xl overflow-hidden relative">
-              <img
-                src={product.images[selectedImage]}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-4 right-4 flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setIsWishlisted(!isWishlisted)}
-                  className="bg-background/80 hover:bg-background"
-                >
-                  <Heart className={`h-5 w-5 ${isWishlisted ? 'fill-accent text-accent' : ''}`} />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="bg-background/80 hover:bg-background"
-                >
-                  <Share2 className="h-5 w-5" />
-                </Button>
+        <div className="grid lg:grid-cols-[40%_60%] gap-8 mb-12">
+          {/* Product Images - Sticky */}
+          <div className="relative">
+            <div className="sticky top-20 space-y-4 max-h-[calc(100vh-5rem)] overflow-hidden">
+              {/* Main Image */}
+              <div className="h-[400px] bg-surface rounded-xl overflow-hidden relative flex items-center justify-center">
+                <img
+                  src={product.images[selectedImage]}
+                  alt={product.name}
+                  className="h-full w-full object-contain"
+                />
+                <div className="absolute top-4 right-4 flex gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsWishlisted(!isWishlisted)}
+                    className="bg-background/80 hover:bg-background"
+                  >
+                    <Heart className={`h-5 w-5 ${isWishlisted ? 'fill-accent text-accent' : ''}`} />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="bg-background/80 hover:bg-background"
+                  >
+                    <Share2 className="h-5 w-5" />
+                  </Button>
+                </div>
               </div>
-            </div>
-            
-            <div className="grid grid-cols-4 gap-2">
-              {product.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`aspect-square rounded-lg overflow-hidden border-2 ${
-                    selectedImage === index ? 'border-primary' : 'border-border'
-                  }`}
-                >
-                  <img
-                    src={image}
-                    alt={`Product ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
+
+              {/* Thumbnails (scrollable if overflow) */}
+              <div className="grid grid-cols-4 gap-2 max-h-[140px] overflow-y-auto pr-1">
+                {product.images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImage(index)}
+                    className={`aspect-square rounded-lg overflow-hidden border-2 ${
+                      selectedImage === index ? 'border-primary' : 'border-border'
+                    }`}
+                  >
+                    <img
+                      src={image}
+                      alt={`Product ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Product Info */}
           <div className="space-y-6">
-            <div>
-              <h1 className="text-3xl font-bold text-text-primary mb-2">
-                {product.name}
-              </h1>
-              
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex items-center gap-1 bg-success text-success-foreground px-2 py-1 rounded text-sm font-medium">
-                  <Star className="h-4 w-4 fill-current" />
-                  {product.rating}
-                </div>
-                <span className="text-text-secondary">
-                  {product.reviewCount.toLocaleString()} ratings
-                </span>
+            <h1 className="text-3xl font-bold text-text-primary mb-2">{product.name}</h1>
+            
+            <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-1 bg-success text-success-foreground px-2 py-1 rounded text-sm font-medium">
+                <Star className="h-4 w-4 fill-current" />
+                {product.rating}
               </div>
-
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl font-bold text-text-primary">
-                  ₹{product.price.toLocaleString()}
-                </span>
-                <span className="text-lg text-text-secondary line-through">
-                  ₹{product.originalPrice.toLocaleString()}
-                </span>
-                <Badge className="bg-success text-success-foreground">
-                  {discountPercentage}% off
-                </Badge>
-              </div>
-
-              <p className="text-text-secondary leading-relaxed">
-                {product.description}
-              </p>
+              <span className="text-text-secondary">{product.reviewCount.toLocaleString()} ratings</span>
             </div>
+
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl font-bold text-text-primary">₹{product.price.toLocaleString()}</span>
+              <span className="text-lg text-text-secondary line-through">₹{product.originalPrice.toLocaleString()}</span>
+              <Badge className="bg-success text-success-foreground">{discountPercentage}% off</Badge>
+            </div>
+
+            <p className="text-text-secondary leading-relaxed">{product.description}</p>
 
             {/* Key Features */}
             <div>
@@ -223,6 +215,8 @@ const ProductDetail = () => {
               </CardContent>
             </Card>
 
+            
+
             {/* Add to Cart */}
             <div className="space-y-4">
               <div className="flex items-center gap-4">
@@ -249,12 +243,8 @@ const ProductDetail = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <Button className="h-12" variant="outline">
-                  Add to Cart
-                </Button>
-                <Button className="h-12">
-                  Buy Now
-                </Button>
+                <Button className="h-12" variant="outline">Add to Cart</Button>
+                <Button className="h-12">Buy Now</Button>
               </div>
             </div>
 
@@ -357,16 +347,12 @@ const ProductDetail = () => {
                     className="w-full aspect-square object-cover"
                   />
                   <div className="p-4">
-                    <h3 className="font-medium text-text-primary mb-2 line-clamp-2">
-                      {product.name}
-                    </h3>
+                    <h3 className="font-medium text-text-primary mb-2 line-clamp-2">{product.name}</h3>
                     <div className="flex items-center gap-1 mb-2">
                       <Star className="h-3 w-3 fill-warning text-warning" />
                       <span className="text-sm text-text-secondary">{product.rating}</span>
                     </div>
-                    <div className="font-bold text-text-primary">
-                      ₹{product.price.toLocaleString()}
-                    </div>
+                    <div className="font-bold text-text-primary">₹{product.price.toLocaleString()}</div>
                   </div>
                 </CardContent>
               </Card>

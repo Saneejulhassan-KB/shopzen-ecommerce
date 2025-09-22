@@ -1,0 +1,38 @@
+import ProductCardNew from "./ProductCardNew";
+
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  rating: number;
+  reviewCount: number;
+  image: string;
+  discount?: number;
+  isWishlisted?: boolean;
+  isBestseller?: boolean;
+  deliveryInfo?: string;
+}
+
+interface ProductGridProps {
+  products: Product[];
+  className?: string;
+}
+
+const ProductGridNew = ({ products, className = "" }: ProductGridProps) => {
+  return (
+    <div
+      className={`grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5  ${className}`}
+    >
+      {products.map((product) => (
+        <ProductCardNew
+          key={product.id}
+          product={product}
+          className="cursor-pointer"
+        />
+      ))}
+    </div>
+  );
+};
+
+export default ProductGridNew;
